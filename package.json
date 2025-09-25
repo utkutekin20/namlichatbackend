@@ -1,0 +1,25 @@
+{
+  "name": "namli-turizm-backend",
+  "version": "1.0.0",
+  "description": "Namlı Turizm 7/24 AI Destek Asistanı Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build:tags": "node ./scripts/buildTags.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cheerio": "^1.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.21.2",
+    "mongoose": "^7.8.7",
+    "node-cron": "^3.0.3",
+    "openai": "^4.104.0"
+  }
+}

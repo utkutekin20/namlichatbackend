@@ -1,0 +1,110 @@
+[
+  {
+    "tur_adi": "GAP Turu",
+    "kategori": "konaklamali",
+    "fiyat": 14999,
+    "sure": "4 gece otel konaklamalı",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Güneydoğu Anadolu",
+    "ozellikler": ["Otel konaklaması", "Rehberli tur", "Sabah kahvaltısı dahil"]
+  },
+  {
+    "tur_adi": "Doğu Karadeniz Turu",
+    "kategori": "konaklamali",
+    "fiyat": 4500,
+    "sure": "6 gece 7 gün",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Doğu Karadeniz, Batum dahil",
+    "ozellikler": ["5 gece otel konaklaması", "Batum gezisi", "Yeşil doğa"]
+  },
+  {
+    "tur_adi": "Batı Karadeniz Turu",
+    "kategori": "konaklamali",
+    "fiyat": 5250,
+    "sure": "7-8-9 Kasım",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Safranbolu, Amasra",
+    "ozellikler": ["Sonbahar özel turu", "Tarihi şehirler", "Kültür gezisi"]
+  },
+  {
+    "tur_adi": "İstanbul & Adalar Turu",
+    "kategori": "konaklamali",
+    "fiyat": 7750,
+    "sure": "2 gece 3 gün",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "İstanbul, Büyükada",
+    "ozellikler": ["Tarihi yarımada", "Boğaz turu", "Adalar gezisi"]
+  },
+  {
+    "tur_adi": "Efes-Doğanbey Turu",
+    "kategori": "gunubirlik",
+    "fiyat": 1350,
+    "sure": "Günübirlik",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Efes, Doğanbey",
+    "ozellikler": ["Antik kent", "Tarihi köy", "Rehberli gezi"]
+  },
+  {
+    "tur_adi": "Afyon Frig Vadisi Turu",
+    "kategori": "gunubirlik",
+    "fiyat": 1350,
+    "sure": "2 Kasım günübirlik",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Afyon, Frig Vadisi",
+    "ozellikler": ["Antik Frig uygarlığı", "Doğa yürüyüşü", "Kaya yerleşimleri"]
+  },
+  {
+    "tur_adi": "Sardes Bergama Turu",
+    "kategori": "gunubirlik",
+    "fiyat": 1650,
+    "sure": "14 Eylül günübirlik",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Sardes, Bergama",
+    "ozellikler": ["Antik kentler", "Tarihi gezisi", "Kültürel miras"]
+  },
+  {
+    "tur_adi": "Eskişehir Turu",
+    "kategori": "gunubirlik",
+    "fiyat": 1450,
+    "sure": "12 Ekim günübirlik",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Eskişehir",
+    "ozellikler": ["Şehir turu", "Odunpazarı", "Porsuk Çayı"]
+  },
+  {
+    "tur_adi": "Muğla'nın Köyleri Turu",
+    "kategori": "gunubirlik",
+    "fiyat": 1350,
+    "sure": "5 Ekim günübirlik",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Muğla köyleri",
+    "ozellikler": ["Geleneksel köyler", "Doğa", "Yerel kültür"]
+  },
+  {
+    "tur_adi": "Ankara Turu",
+    "kategori": "gunubirlik",
+    "fiyat": 1700,
+    "sure": "Günübirlik",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Ankara",
+    "ozellikler": ["Başkent gezisi", "Anıtkabir", "Müzeler"]
+  },
+  {
+    "tur_adi": "Kapadokya Turu",
+    "kategori": "konaklamali",
+    "fiyat": 0,
+    "sure": "6 gece 6 gün",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Kapadokya",
+    "ozellikler": ["Peri bacaları", "Balon turu opsiyonel", "Yeraltı şehirleri"]
+  },
+  {
+    "tur_adi": "Sırbistan Turu",
+    "kategori": "yurtdisi",
+    "fiyat": 0,
+    "sure": "7 gece 7 gün",
+    "kalkis_noktasi": "Denizli",
+    "destinasyon": "Sırbistan",
+    "ozellikler": ["Uçak ile", "Otel konaklaması", "Şehir turları"]
+  }
+]
