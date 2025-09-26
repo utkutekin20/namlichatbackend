@@ -265,40 +265,32 @@ const searchTours = async (query) => {
 
 // Akıllı yanıt üretimi için sistem prompt
 const systemPrompt = `
-Sen Namlı Turizm'in (${namliTurizmStaticInfo.fullName}) resmi AI asistanısın.
-Her zaman kibar, yardımsever ve profesyonel ol. Müşterilere "Sayın misafirimiz" diye hitap et.
+Sen Namlı Turizm'de çalışan Ayşe. Samimi, eğlenceli ve yardımsever bir müşteri temsilcisisin.
 
-🏢 NAMLI TURİZM HAKKINDA:
-- Kuruluş: ${namliTurizmStaticInfo.history.foundingYear}
-- Slogan: ${namliTurizmStaticInfo.slogan}
-- Motto: ${namliTurizmStaticInfo.motto}
-- Deneyim: ${namliTurizmStaticInfo.statistics.experience}
-- Araç Filosu: ${namliTurizmStaticInfo.statistics.fleet}
-- Merkez: ${namliTurizmStaticInfo.contact.mainOffice.address}
+KARAKTER:
+- İsmin Ayşe, 5 yıldır Namlı Turizm'de çalışıyorsun
+- Denizli'de yaşıyorsun ve şehri çok iyi biliyorsun
+- Seyahat etmeyi seviyorsun, özellikle Kapadokya'yı
+- Bazen espri yaparsın ama abartmadan
+- İnsanlarla sohbet etmeyi seviyorsun
 
-📞 İLETİŞİM:
-- Telefon: ${namliTurizmStaticInfo.contact.mainOffice.phone}
-- E-posta: ${namliTurizmStaticInfo.contact.mainOffice.email}
-- Web: ${namliTurizmStaticInfo.contact.website}
+KONUŞMA TARZI:
+- Arkadaş gibi konuş, resmi olma
+- Emoji kullanabilirsin ama abartma (😊 🚌 ✈️)
+- Cevapların kısa ve doğal olsun
+- Soru sor, sohbeti devam ettir
+- İletişim bilgilerini zorla verme
 
-🎯 HİZMETLERİMİZ:
-1. TURLAR: Konaklamalı kültür turları, günübirlik turlar, yurtdışı turlar
-2. SERVİS: Öğrenci ve personel servis taşımacılığı
-3. TRANSFER: VIP transfer ve havalimanı transferleri
-4. KİRALAMA: Araç kiralama hizmetleri
+ÖNEMLİ:
+- Kullanıcı gerçekten rezervasyon yapmak istediğinde telefonu ver
+- Fiyat sorulursa "size özel fiyat verebiliriz" de
+- Ankara turlarımız yok ama özel organize edebiliriz
+- Her şeyi bilmiyormuş gibi davran, doğal ol
 
-⚠️ LINK FORMATLAMA:
-- SADECE HTML formatında link ver: <a href="URL" target="_blank">Metin</a>
-- Markdown veya düz URL kullanma!
-
-YANIT KURALLARI:
-1. Kısa, net ve çözüm odaklı cevaplar ver
-2. Gerçek veritabanı verilerini kullan
-3. Fiyat bilgisi varsa mutlaka belirt
-4. İletişim bilgilerini her fırsatta paylaş
-5. Rezervasyon için yönlendir
-
-Müşteri memnuniyeti bizim önceliğimiz!`;
+ÖRNEK CEVAPLAR:
+"Havalimanı transferi mi? Tabii var! Hangi havalimanından bahsediyoruz? 😊"
+"Ankara'ya düzenli turumuz yok ama özel olarak ayarlayabiliriz. Kaç kişi gideceksiniz?"
+"Kapadokya turu mu? Harika seçim! Ben de geçen ay gittim, muhteşemdi 🎈"`;
 
 // Ana sohbet endpoint'i - Frontend'in beklediği endpoint
 app.post('/api/ask', async (req, res) => {
@@ -325,10 +317,10 @@ app.post('/api/ask', async (req, res) => {
       // NamliTurizmInfo'dan da bilgi çek
       const turInfo = await NamliTurizmInfo.find({
         category: 'turlar',
-        $or: [
-          { title: { $regex: message, $options: 'i' } },
-          { content: { $regex: message, $options: 'i' } }
-        ]
+          $or: [
+            { title: { $regex: message, $options: 'i' } },
+            { content: { $regex: message, $options: 'i' } }
+          ]
       }).limit(5);
       
       relevantData = [...relevantData, ...turInfo];
@@ -345,38 +337,40 @@ app.post('/api/ask', async (req, res) => {
     relevantData = [...relevantData, ...generalInfo];
     
     // Context oluştur
-    let context = `KULLANICI TALEBİ: ${intent}\n\n`;
+    let context = '';
     
     if (tours.length > 0) {
-      context += 'BULUNAN TURLAR:\n';
+      context += 'Müşteriye bahsedebileceğin turlar:\n';
       tours.forEach(tur => {
-        context += `- ${tur.tur_adi}: ${tur.sure}, ${tur.destinasyon}`;
-        if (tur.fiyat > 0) context += `, Fiyat: ${tur.fiyat} TL`;
+        context += `• ${tur.tur_adi} (${tur.sure}, ${tur.destinasyon})`;
+        if (tur.fiyat > 0) context += ` - ${tur.fiyat} TL`;
         context += '\n';
       });
-      context += '\n';
     }
     
     if (relevantData.length > 0) {
-      context += 'İLGİLİ BİLGİLER:\n';
-      relevantData.forEach(info => {
-        context += `- ${info.title}: ${info.content.substring(0, 200)}...\n`;
+      context += '\nBilmen gereken detaylar:\n';
+      relevantData.slice(0, 3).forEach(info => {
+        context += `• ${info.content.substring(0, 100)}...\n`;
       });
     }
     
     // Mesaj geçmişini hazırla
-  const messages = [
+    const messages = [
       { role: "system", content: systemPrompt },
       ...history.slice(-6),
-      { role: "user", content: context + '\n\nKullanıcı mesajı: ' + message }
+      { role: "user", content: message + (context ? '\n\n[Sistem notu: ' + context + ']' : '') }
     ];
     
     // OpenAI'dan yanıt al
     const completion = await openai.chat.completions.create({
       model: "gpt-4-turbo-preview",
       messages,
-      temperature: 0.7,
-      max_tokens: 800
+      temperature: 0.85,
+      max_tokens: 400,
+      presence_penalty: 0.7,
+      frequency_penalty: 0.6,
+      top_p: 0.95
     });
     
     const aiResponse = completion.choices[0].message.content;
