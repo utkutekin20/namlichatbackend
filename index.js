@@ -547,4 +547,5 @@ setTimeout(async () => {
   }
 }, 5000); // 5 saniye sonra başlat
 
-app.listen(3000, () => console.log('✅ Namlı Turizm backend http://localhost:3000 üzerinde çalışıyor!'));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`✅ Namlı Turizm backend http://localhost:${PORT} üzerinde çalışıyor!`));
